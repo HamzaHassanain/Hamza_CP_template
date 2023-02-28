@@ -1,9 +1,9 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-#define print(nums, n)                      \
-    for (long long i = 0; i < n; i++)       \
-        cout << bitset<12>(nums[i]) << " "; \
+#define print(nums, n)                \
+    for (long long i = 0; i < n; i++) \
+        cout << nums[i] << " ";       \
     cout << endl;
 
 void FastIO()
@@ -13,81 +13,46 @@ void FastIO()
     freopen("input.txt", "r", stdin), freopen("output.txt", "w", stdout);
 #endif
 }
+#define maxHeap(type) priority_queue<type, vector<type>, less<type>>
+#define minHeap(type) priority_queue<type, vector<type>, greater<type>>
+
 class Solution
 {
 public:
-    int ors(vector<int> &m)
+    int minDistance(string word1, string word2)
     {
-        int cur = 0;
-        for (int x : m)
-            cur = cur | x;
-        return cur;
-    }
-    bool makesquare(vector<int> &m)
-    {
-        int side = 0;
-        for (int match : m)
-            side += match;
-        cout << side << endl;
-        if (side % 4)
-            return false;
-        else
-            side /= 4;
-        cout << side << endl;
-        int n = m.size();
-        const int mx = 1 << n;
-        vector<int> masks;
-        for (int mask = 1; mask < mx; mask++)
+        const int n = word1.size();
+        const int m = word2.size();
+        vector<vector<int>> dp(m + 1, vector<int>(n + 1));
+
+        for (int i = 0; i < m; i++)
+            dp[i][n] = m - i;
+        for (int i = 0; i < n; i++)
+            dp[m][i] = n - i;
+        dp[m][n] = 0;
+
+        for (int i = m - 1; i >= 0; i--)
         {
-            int sum = 0;
-            for (int j = 0; j < n; j++)
+            for (int j = n - 1; j >= 0; j--)
             {
-                if (mask & (1 << j))
-                    sum += m[j];
-            }
-            if (sum == side)
-            {
-                // cout << sum << endl;
-                masks.push_back(mask);
+                if (word1[j] != word2[i])
+                    dp[i][j] = min(min(dp[i][j + 1], dp[i + 1][j]), dp[i + 1][j + 1]) + 1;
+                else
+                    dp[i][j] = dp[i + 1][j + 1];
             }
         }
-        if (ors(masks) != mx - 1)
-            return false;
-        for (int i = 0; i < masks.size(); i++)
-        {
-            int cur1 = masks[i];
-            for (int j = 0; j < masks.size(); j++)
-            {
-                if (i == j)
-                    continue;
-                int cur2 = masks[j];
-                if (!(cur2 & cur1))
-                    for (int k = 0; k < masks.size(); k++)
-                    {
-                        if (i == k || j == k)
-                            continue;
-                        int cur3 = masks[k];
-                        if (!(cur2 & cur3) && !(cur1 & cur3))
-                            for (int l = 0; l < masks.size(); l++)
-                            {
-                                if (i == l || j == l || l == k)
-                                    continue;
-                                int cur4 = masks[l];
-                                if (!(cur4 & cur3) && !(cur4 & cur2) || !(cur4 & cur1))
-                                    return true;
-                            }
-                    }
-            }
-        }
-        return false;
+
+        return dp[0][0];
     }
 };
 
 int main()
 {
     FastIO();
-    vector<int> str = {10, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    string w1 = "";
+    string w2 = "";
+    cin >> w1 >> w2;
     Solution sol;
-    cout << sol.makesquare(str) << endl;
+    cout << sol.minDistance(w1, w2) << endl;
     // priority_queue<int, vector<int>,
 }
