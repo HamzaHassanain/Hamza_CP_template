@@ -19,40 +19,33 @@ void FastIO()
 class Solution
 {
 public:
-    int minDistance(string word1, string word2)
+    int pivot = 0;
+    int compress(vector<char> &chars)
     {
-        const int n = word1.size();
-        const int m = word2.size();
-        vector<vector<int>> dp(m + 1, vector<int>(n + 1));
-
-        for (int i = 0; i < m; i++)
-            dp[i][n] = m - i;
+        int n = chars.size();
         for (int i = 0; i < n; i++)
-            dp[m][i] = n - i;
-        dp[m][n] = 0;
-
-        for (int i = m - 1; i >= 0; i--)
         {
-            for (int j = n - 1; j >= 0; j--)
-            {
-                if (word1[j] != word2[i])
-                    dp[i][j] = min(min(dp[i][j + 1], dp[i + 1][j]), dp[i + 1][j + 1]) + 1;
-                else
-                    dp[i][j] = dp[i + 1][j + 1];
-            }
+            int j = i + 1;
+            while (j < n && chars[i] == chars[j])
+                j++;
+            int len = j - i;
+            chars[pivot++] = chars[i];
+            if (len > 1)
+                chars[pivot++] = len + '0';
+            // cout << pivot << endl;
+            i = j - 1;
         }
+        print(chars, n);
 
-        return dp[0][0];
+        return pivot;
     }
 };
-
 int main()
 {
     FastIO();
-    string w1 = "";
-    string w2 = "";
-    cin >> w1 >> w2;
+    vector<char> chars = {'a', 'a', 'c', 'c', 'c', 'c', 'c'};
+    // vector<char> chars = {'a'};
     Solution sol;
-    cout << sol.minDistance(w1, w2) << endl;
+    cout << sol.compress(chars) << endl;
     // priority_queue<int, vector<int>,
 }

@@ -83,3 +83,127 @@ bool tprime(ll num)
     ll x = sqrt(num);
     return prime[x] && y == x;
 }
+
+ll gcd(ll a, ll b)
+{
+    if (a == 0)
+        return b;
+    return gcd(b % a, a);
+}
+
+ll gcdAll(vector<ll> &nums, int from = 0)
+{
+    ll n = sz(nums);
+    ll cur = nums[from];
+    for (ll i = from + 1; i < n; i++)
+    {
+        cur = gcd(cur, nums[i]);
+    }
+    return cur;
+}
+bool all_equal(vector<ll> &nums, int from = 0)
+{
+    int n = sz(nums);
+    ll cur = nums[from];
+    for (ll i = from + 1; i < n; i++)
+    {
+        if (cur != nums[i])
+            return false;
+    }
+    return true;
+}
+short digit(char ch)
+{
+    return ch - '0';
+};
+ull sigma(ull x)
+{
+    return x * (x + 1) / 2;
+}
+ll sum_num(ll n)
+{
+    ll sum = 0;
+    while (n > 0)
+    {
+        sum += (n % 10);
+        n /= 10;
+    }
+    return sum;
+}
+ull custom_pow(ull a, ull b)
+{
+    ull res = 1;
+    while (b--)
+        res *= a;
+
+    return res;
+}
+ll custom_log(ll a, ll b)
+{
+    return log2(a) / log2(b);
+}
+vec primeFactors(ll n)
+{
+    // implement
+}
+int count2s(ll n)
+{
+    ll res = 0;
+    ll c = 2;
+    while (n > 1 && n % c == 0)
+    {
+        res++;
+        n /= c;
+    }
+    return res;
+}
+bool equals(vector<ll> &a, vector<ll> &b)
+{
+    int n = size(a);
+    for (ll i = 0; i < n; i++)
+    {
+        if (a[i] != b[i])
+            return false;
+    }
+    return true;
+}
+ll max(vector<ll> &nums)
+{
+    int n = size(nums);
+    ll mx = -OO;
+    for (ll i = 0; i < n; i++)
+    {
+        mx = max(mx, nums[i]);
+    }
+    return mx;
+}
+ll min(vector<ll> &nums)
+{
+    int n = size(nums);
+    ll mn = OO;
+    for (ll i = 0; i < n; i++)
+    {
+        mn = min(mn, nums[i]);
+    }
+    return mn;
+}
+ll max(vector<ll> &nums, int beg, int end)
+{
+    int n = end;
+    ll mx = -OO;
+    for (ll i = beg; i < n; i++)
+    {
+        mx = max(mx, nums[i]);
+    }
+    return mx;
+}
+ll min(vector<ll> &nums, int beg, int end)
+{
+    int n = end;
+    ll mn = OO;
+    for (ll i = beg; i < n; i++)
+    {
+        mn = min(mn, nums[i]);
+    }
+    return mn;
+}

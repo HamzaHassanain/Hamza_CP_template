@@ -1,7 +1,22 @@
-3
-6
-30 4 10 8 6 3
-4
-4 4 4 4
-3
-6 3 3
+7
+6 3
+talant
+atltna
+7 3
+abacaba
+aaaabbc
+12 3
+abracadabraa
+avadakedavra
+5 3
+accio
+cicao
+5 3
+lumos
+molus
+4 3
+uwjt
+twju
+4 3
+kvpx
+vxpk
