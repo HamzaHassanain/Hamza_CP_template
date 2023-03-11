@@ -51,3 +51,10 @@
             right = 2 * node + 2
 
             remember mid + 1
+
+14 => regExp Matching: leetcode Hard
+    1-> read question first read question read read read
+    2-> read the editorial well and make sure you understand every thing
+
+
+15 =>  انت عرص و خول و متناك يلا يا عرص يا خول بقالك كام يوم بتقول هتحل يا عرص 100 خرا على دماغك contest بس زي الخول مبتعملش حاجه يعني يا عرص بص الي فوق ده من كام يوم يا عرص من التلات الي قبل الي فات و انت زي الخول ما عملتش اي حاجه تذكر يالا يا عرص قوم عشان لسه قدام دين امك 100 كونتست تحل a b c و مفيش اي لايف كونتست الا لما تخلصهم يلا ياد يا عرص  

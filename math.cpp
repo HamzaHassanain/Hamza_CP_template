@@ -138,14 +138,38 @@ ull custom_pow(ull a, ull b)
 
     return res;
 }
+ll cell(ull i, ull j)
+{
+    return (i - 1) * m + j;
+}
 ll custom_log(ll a, ll b)
 {
     return log2(a) / log2(b);
 }
-vec primeFactors(ll n)
+vec primeFactors(int n)
 {
-    // implement
+    vec factors;
+    while (n % 2 == 0)
+    {
+        factors.push_back(2);
+        n = n / 2;
+    }
+
+    for (int i = 3; i <= sqrt(n); i = i + 2)
+    {
+        while (n % i == 0)
+        {
+            factors.push_back(i);
+            n = n / i;
+        }
+    }
+
+    if (n > 2)
+        factors.push_back(n);
+
+    return factors;
 }
+
 int count2s(ll n)
 {
     ll res = 0;
@@ -206,4 +230,110 @@ ll min(vector<ll> &nums, int beg, int end)
         mn = min(mn, nums[i]);
     }
     return mn;
+}
+ull fact(ull x)
+{
+    ull res = 1;
+    while (x > 0)
+        res *= x--;
+
+    return res;
+}
+ll count_bin_ones(ll n)
+{
+    int c = 0;
+    int i = 1;
+    while (n)
+    {
+        if (n & 1)
+            c++;
+        n = n >> 1;
+    }
+    return c;
+}
+// mask & (1 << i)
+//   int MAX = 1 << N;
+int bitMaskFirst(string s)
+{
+    const int N = s.size();
+    int MAX = 1 << N;
+    for (int mask = 1; mask < MAX; mask++)
+    {
+        string subSq = "";
+        for (int i = 0; i < N; i++)
+        {
+            if (mask & (1 << i))
+                subSq += s[i];
+        }
+    }
+}
+bool value(map<ll, ll> &mp)
+{
+    bool ex = false;
+
+    for (auto [_, val] of mp)
+        ex = ex || val;
+
+    return ex;
+}
+ll num_len(ll n)
+{
+    ll res = 0;
+    while (n)
+    {
+        if (n % 10)
+            res++;
+        n /= 10;
+    }
+    return res;
+}
+// data endcoding
+// partial[n + 2]{};
+// if (prefix[r1] - prefix[l1 - 1] > prefix[r2] - prefix[l2 - 1])
+//     partial[l1]++, partial[r1 + 1]--;
+// else if (prefix[r1] - prefix[l1 - 1] < prefix[r2] - prefix[l2 - 1])
+//     partial[l2]++, partial[r2 + 1]--;
+
+// for (int i = 1; i < n + 2; i++)
+//     partial[i] += partial[i - 1];
+
+ull acc(vec &nums)
+{
+    ull sum = 0;
+    for (int i = 0; i < nums.size(); i++)
+    {
+        sum += nums[i];
+    }
+    return sum;
+}
+
+ull sigma(ull x)
+{
+    return x * (x + 1) / 2;
+}
+ull sigmaSquared(ull x)
+{
+    return (((x * ((x + 1))) * (((x * 2) + 1)))) / 6;
+}
+ull acc(vec &nums)
+{
+    ull sum = 0;
+    for (int i = 0; i < nums.size(); i++)
+    {
+        sum += nums[i];
+    }
+    return sum;
+}
+
+ull custom_pow(ull a, ull b)
+{
+    ull res = 1;
+    while (b--)
+        res *= a;
+
+    return res;
+}
+ull mod(ull equ)
+{
+    return equ % MOD;
 }

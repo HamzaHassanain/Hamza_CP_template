@@ -1,22 +1,5 @@
-7
-6 3
-talant
-atltna
-7 3
-abacaba
-aaaabbc
-12 3
-abracadabraa
-avadakedavra
-5 3
-accio
-cicao
-5 3
-lumos
-molus
-4 3
-uwjt
-twju
-4 3
-kvpx
-vxpk
+4
+2
+3
+50
+1000000000
