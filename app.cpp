@@ -10,6 +10,9 @@ using std::chrono::milliseconds;
 
 bool global_use_clock = false;
 bool global_use_test_case = false;
+#define use_double(num)        \
+    cout << setprecision(num); \
+    cout << fixed;
 #define use_clock global_use_clock = true;
 #define use_test_case global_use_test_case = true;
 #define space << " " <<
@@ -27,15 +30,18 @@ typedef vector<string> vecstr;
 typedef pair<ll, ll> pl;
 typedef map<ll, ll> mpll;
 #define vec(type) vector<type>
+#define deq(type) deque<type>
 ll OO = 1e9;
 ull MOD = 1e9 + 7;
 
 #define sz(cont) size(cont)
 #define of :
-#define nl << "\n"
+#define end "\n"
 #define null nullptr
-#define no return void(cout << "No" nl)
-#define yes return void(cout << "Yes" nl)
+#define NO return void(cout << "NO" << end)
+#define YES return void(cout << "YES" << end)
+#define no return void(cout << "No" << end)
+#define yes return void(cout << "Yes" << end)
 #define all(vec) vec.begin(), vec.end()
 #define allrev(vec) vec.rbegin(), vec.rend()
 #define forn(i, n) for (ll i = 0; i < n; ++i)
@@ -67,7 +73,7 @@ ostream &operator<<(ostream &out, vector<T> &outto)
 {
     for (ll i = 0; i < size(outto); i++)
         out << outto[i] << " ";
-    out nl;
+    out << end;
     return out;
 }
 template <typename T>
@@ -75,24 +81,24 @@ ostream &operator<<(ostream &out, deque<T> &outto)
 {
     for (ll i = 0; i < size(outto); i++)
         out << outto[i] << " ";
-    out nl;
+    out << end;
     return out;
 }
 template <typename T, typename S>
 ostream &operator<<(ostream &out, vector<pair<T, S>> &outto)
 {
     for (ll i = 0; i < size(outto); i++)
-        out << outto[i].first << ":" << outto[i].second nl;
+        out << outto[i].first << " " << outto[i].second << end;
     return out;
 }
 template <typename T, typename S>
 ostream &operator<<(ostream &out, pair<T, S> &outto)
 {
-    out << outto.first << ":" << outto.second nl;
+    out << outto.first << ":" << outto.second << end;
     return out;
 }
 #define sep cout << "===================================" << endl;
-#define rv(exp) return void(cout << exp)
+#define rv(exp) return void(cout << exp << end)
 #define str string
 #define maxHeap(type) priority_queue<type, vector<type>, less<type>>
 #define minHeap(type) priority_queue<type, vector<type>, greater<type>>
@@ -105,13 +111,39 @@ void FastIO()
 #endif
 }
 
+/**
+ * Your WordDictionary object will be instantiated and called as such:
+ * WordDictionary* obj = new WordDictionary();
+ * obj->addWord(word);
+ * bool param_2 = obj->search(word);
+ */
+ll gcdAll(vector<ll> &nums, int from = 0)
+{
+    ll n = sz(nums);
+    ll cur = nums[from];
+    for (ll i = from + 1; i < n; i++)
+    {
+        cur = gcd(cur, nums[i]);
+    }
+    return cur;
+}
+void out()
+{
+}
+template <typename First, typename... Strings>
+void out(First arg, const Strings &...rest)
+{
+    std::cout << arg;
+    out(rest...);
+}
+
 void test_case()
 {
 }
 int main()
 {
-    use_test_case;
 
+    use_test_case;
     auto t1 = high_resolution_clock::now();
     FastIO();
     ll tc = 1;
@@ -124,11 +156,5 @@ int main()
     /* Getting number of milliseconds as a double. */
     duration<double, std::milli> ms_double = t2 - t1;
     if (global_use_clock)
-    {
-
-        cout nl;
-        cout << "Chrono =========================" nl;
-        cout << ms_double.count() << "ms\n";
-        cout << "Chrono =========================";
-    }
+        cout << end << ms_double.count() << "milliseconds\n";
 }

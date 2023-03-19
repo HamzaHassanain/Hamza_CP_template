@@ -337,3 +337,15 @@ ull mod(ull equ)
 {
     return equ % MOD;
 }
+// valid sub arrays
+//  while (r < n)
+//     {
+//         while (l < n && nums[r] < i)
+//         {
+//             l++;
+//             i--;
+//         }
+//         res += r - l + 1;
+//         r++;
+//         i++;
+//     }
