@@ -1,2 +1,2 @@
 
-    cin >> n;
+        cout << 1 spaceEnd;

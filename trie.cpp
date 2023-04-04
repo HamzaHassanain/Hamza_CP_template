@@ -38,29 +38,24 @@ public:
 		node->isEndOfWord = true;
 	}
 
-	bool search(string &word, TrieNode *node, int idx)
-	{
-		if (not node)
-			return false;
-		if (idx > word.size())
-			return false;
-		if (idx == word.size())
-			return node->isEndOfWord;
-		if (word[idx] != '.')
-			return search(word, node->children[word[idx] - 'a'], idx + 1);
-
-		for (int i = 0; i < 26; i++)
-		{
-			if (search(word, node->children[i], idx + 1))
-				return true;
-		}
-
-		return false;
-	}
 	bool search(string word)
 	{
-		return this->search(word, head, 0);
+		TrieNode *node = head;
+		int curr = 0;
+
+		for (int i = 0; i < word.size(); i++)
+		{
+			curr = word[i] - 'a';
+			if (node->children[curr] == NULL)
+			{
+				return false;
+			}
+			node = node->children[curr];
+		}
+
+		return node->isEndOfWord;
 	}
+
 	bool startsWith(string &prefix)
 	{
 		TrieNode *node = head;

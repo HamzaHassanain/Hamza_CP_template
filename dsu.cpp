@@ -10,13 +10,10 @@ using std::chrono::milliseconds;
 
 bool global_use_clock = false;
 bool global_use_test_case = false;
-#define use_double(num)        \
-    cout << setprecision(num); \
-    cout << fixed;
 #define use_clock global_use_clock = true;
 #define use_test_case global_use_test_case = true;
-#define sp << " " <<
-#define spe << " "
+#define space << " " <<
+#define spaceEnd << " "
 
 typedef long long ll;
 typedef unsigned long long ull;
@@ -30,20 +27,17 @@ typedef vector<string> vecstr;
 typedef pair<ll, ll> pl;
 typedef map<ll, ll> mpll;
 #define vec(type) vector<type>
-#define deq(type) deque<type>
 ll OO = 1e9;
 ull MOD = 1e9 + 7;
 
 #define sz(cont) size(cont)
 #define of :
-#define endl "\n"
+#define nl << "\n"
 #define null nullptr
-#define NO return void(cout << "NO" << endl)
-#define YES return void(cout << "YES" << endl)
-#define no return void(cout << "No" << endl)
-#define yes return void(cout << "Yes" << endl)
+#define no return void(cout << "No" nl)
+#define yes return void(cout << "Yes" nl)
 #define all(vec) vec.begin(), vec.end()
-#define rall(vec) vec.rbegin(), vec.rend()
+#define allrev(vec) vec.rbegin(), vec.rend()
 #define forn(i, n) for (ll i = 0; i < n; ++i)
 #define for1n(i, n) for (ll i = 1; i <= n; ++i)
 #define forr(i, n) for (ll i = n - 1; i >= 0; --i)
@@ -54,14 +48,6 @@ bool by_len(string &a, string b)
 }
 template <typename T>
 istream &operator>>(istream &in, vector<T> &into)
-{
-    for (ll i = 0; i < size(into); i++)
-        in >> into[i];
-
-    return in;
-}
-template <typename T>
-istream &operator>>(istream &in, deque<T> &into)
 {
     for (ll i = 0; i < size(into); i++)
         in >> into[i];
@@ -81,6 +67,7 @@ ostream &operator<<(ostream &out, vector<T> &outto)
 {
     for (ll i = 0; i < size(outto); i++)
         out << outto[i] << " ";
+    out nl;
     return out;
 }
 template <typename T>
@@ -88,23 +75,24 @@ ostream &operator<<(ostream &out, deque<T> &outto)
 {
     for (ll i = 0; i < size(outto); i++)
         out << outto[i] << " ";
+    out nl;
     return out;
 }
 template <typename T, typename S>
 ostream &operator<<(ostream &out, vector<pair<T, S>> &outto)
 {
     for (ll i = 0; i < size(outto); i++)
-        out << outto[i].first << " " << outto[i].second << endl;
+        out << outto[i].first << ":" << outto[i].second nl;
     return out;
 }
 template <typename T, typename S>
 ostream &operator<<(ostream &out, pair<T, S> &outto)
 {
-    out << outto.first << ":" << outto.second << endl;
+    out << outto.first << ":" << outto.second nl;
     return out;
 }
 #define sep cout << "===================================" << endl;
-#define rv(exp) return void(cout << exp << endl)
+#define rv(exp) return void(cout << exp)
 #define str string
 #define maxHeap(type) priority_queue<type, vector<type>, less<type>>
 #define minHeap(type) priority_queue<type, vector<type>, greater<type>>
@@ -123,6 +111,7 @@ void test_case()
 int main()
 {
     use_test_case;
+
     auto t1 = high_resolution_clock::now();
     FastIO();
     ll tc = 1;
@@ -135,6 +124,11 @@ int main()
     /* Getting number of milliseconds as a double. */
     duration<double, std::milli> ms_double = t2 - t1;
     if (global_use_clock)
-        cout << endl
-             << ms_double.count() << "milliseconds\n";
+    {
+
+        cout nl;
+        cout << "Chrono =========================" nl;
+        cout << ms_double.count() << "ms\n";
+        cout << "Chrono =========================";
+    }
 }
