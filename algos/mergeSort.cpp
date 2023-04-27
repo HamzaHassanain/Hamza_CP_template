@@ -1,69 +1,48 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-class Solution
+typedef long long ll;
+ll run_merge(vector<int> &arr, vector<int> &temp, int l, int mid, int r)
 {
-public:
-    vector<int> sortArray(vector<int> &nums)
+    ll cur_crossing = 0;
+
+    int i, j, k;
+    i = l;
+    j = mid;
+    k = l;
+
+    while (i <= (mid - 1) && j <= r)
     {
-        mergeSort(nums, 0, size(nums) - 1);
-
-        return nums;
-    }
-    void mergeSort(vector<int> &nums, int l, int r)
-    {
-        if (l >= r)
-            return;
-        int mid = l + (r - l) / 2;
-        mergeSort(nums, l, mid);
-        mergeSort(nums, mid + 1, r);
-        merge(nums, l, mid, r);
-    }
-    void merge(vector<int> &arr, int l, int mid, int r)
-    {
-
-        int n1 = mid - l + 1;
-        int n2 = r - mid;
-
-        int L[n1], M[n2];
-
-        for (int i = 0; i < n1; i++)
-            L[i] = arr[l + i];
-        for (int j = 0; j < n2; j++)
-            M[j] = arr[mid + 1 + j];
-
-        int i, j, k;
-        i = 0;
-        j = 0;
-        k = l;
-
-        while (i < n1 && j < n2)
+        if (arr[i] <= arr[j])
         {
-            if (L[i] <= M[j])
-            {
-                arr[k] = L[i];
-                i++;
-            }
-            else
-            {
-                arr[k] = M[j];
-                j++;
-            }
-            k++;
+            temp[k++] = arr[i++];
         }
-
-        while (i < n1)
+        else
         {
-            arr[k] = L[i];
-            i++;
-            k++;
-        }
-
-        while (j < n2)
-        {
-            arr[k] = M[j];
-            j++;
-            k++;
+            cur_crossing += (mid - i);
+            temp[k++] = arr[j++];
         }
     }
-};
+
+    while (i <= mid - 1)
+        temp[k++] = arr[i++];
+
+    while (j <= r)
+        temp[k++] = arr[j++];
+
+    for (i = l; i <= r; i++)
+        arr[i] = temp[i];
+
+    return cur_crossing;
+}
+ll mergeSort(vector<int> &nums, vector<int> &temp, int l, int r)
+{
+    ll cur_crossing = 0;
+    if (l >= r)
+        return 0;
+    int mid = l + (r - l) / 2;
+    cur_crossing = mergeSort(nums, temp, l, mid);
+    cur_crossing += mergeSort(nums, temp, mid + 1, r);
+    cur_crossing += run_merge(nums, temp, l, mid + 1, r);
+
+    return cur_crossing;
+}

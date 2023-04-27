@@ -6,10 +6,11 @@ using namespace std;
 struct TrieNode
 {
 	bool isEndOfWord;
-	vector<TrieNode *> children;
+	TrieNode *children[26];
 	TrieNode(bool isEndOfWord = false) : isEndOfWord{isEndOfWord}
 	{
-		children = vector<TrieNode *>(26, nullptr);
+		for (int i = 0; i < 26; i++)
+			children[i] = nullptr;
 	}
 };
 class Trie
