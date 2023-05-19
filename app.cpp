@@ -1,3 +1,4 @@
+// عَافِرِ وَ بتاع //
 #include <bits/stdc++.h>
 #include <iomanip>
 #include <chrono>
@@ -36,7 +37,7 @@ ll OO = 1e9;
 ll OOO = 1e18;
 ull MOD = 1e9 + 7;
 ull MOD2 = 998244353;
-#define sz(cont) size(cont)
+#define sz(cont) (ll) size(cont)
 #define of :
 #define endl "\n"
 #define null nullptr
@@ -91,83 +92,46 @@ void using_local()
     myfile.open("hamza_local");
     if (myfile)
     {
-#ifndef ONLINE_JUDGE
         use_debug;
-        freopen("input.txt", "r", stdin), freopen("output.txt", "w", stdout);
-#endif
+        freopen("input", "r", stdin), freopen("output", "w", stdout);
     }
 }
-#define google_case(test, res) rv("Case #" << test << ": " << res)
-ll gcdAll(vector<ll> &nums, int from = 0)
-{
-    ll n = sz(nums);
-    ll cur = nums[from];
-    for (ll i = from + 1; i < n; i++)
-    {
-        cur = gcd(cur, nums[i]);
-    }
-    return cur;
-}
-template <typename T>
-istream &operator>>(istream &in, vector<vector<T>> &into)
-{
-    for (ll i = 0; i < size(into); i++)
-        for (ll j = 0; j < size(into[0]); j++)
-            in >> into[i][j];
 
-    return in;
-}
-template <typename T>
-ostream &operator<<(ostream &out, vector<vector<T>> &outto)
+// عَافِرِ وَ بتاع //
+/*
+    4
+
+    1     2    3   4  5    6
+
+
+
+*/
+
+vec factors(ll n)
 {
-    for (ll i = 0; i < size(outto); i++)
+    vec res;
+    for (ll x = 1; x * x <= n; x++)
     {
-        for (int j = 0; j < outto[0].size(); j++)
+        if (n % x == 0)
         {
-            out << outto[i][j] << " ";
+            if (n / x != x)
+                res.push_back(n / x);
+            res.push_back(x);
         }
-        cout << endl;
     }
-    return out;
-}
-void floodfill(vecv &b, int &cnt, int i, int j)
-{
-    if (i >= b.size() || j >= b.size())
-        rt;
-    if (b[i][j])
-        rt;
 
-    cnt++;
-    b[i][j] = 2;
-    floodfill(b, cnt, i + 1, j);
-    floodfill(b, cnt, i - 1, j);
-    floodfill(b, cnt, i, j - 1);
-    floodfill(b, cnt, i, j + 1);
+    return res;
 }
-
 void test_case(int case_num)
 {
-
-    ll a, m;
-    cin >> a >> m;
-    if (gcd(a, m) != 1)
-        rv(-1);
-    ll b;
-    ll temp;
-    inv(a, m, b, temp);
-    cout << (b > 0 ? b : m + b);
 }
 void pre_init()
 {
-    // use_test_case;
     FastIO();
     using_local();
 
-    debug
-    {
-        // use_test_case;
-    }
-    // code
+    use_test_case;
+    debug use_test_case;
 }
 int main()
 {
