@@ -315,3 +315,91 @@ vec factors(ll n)
 
     return res;
 }
+
+//////////////////////// 2D sliding window ////////////////////////
+class MinQ
+{
+public:
+    queue<int> q;
+    deque<int> dq;
+    void push(int x)
+    {
+        q.push(x);
+        while (!dq.empty() && x < dq.back())
+        {
+            dq.pop_back();
+        }
+        dq.push_back(x);
+    }
+    void pop()
+    {
+        if (q.front() == dq.front())
+        {
+            q.pop();
+            dq.pop_front();
+        }
+        else
+            q.pop();
+    }
+    int min()
+    {
+        return dq.front();
+    }
+};
+
+vector<int> minSliding_1d_Window(vector<int> &v, int k)
+{
+    MinQ q;
+    int n = v.size();
+    vector<int> ans;
+    for (int i = 0; i < k; i++)
+    {
+        q.push(v[i]);
+    }
+    for (int i = k; i < n; i++)
+    {
+        ans.push_back(q.min());
+        q.pop();
+        q.push(v[i]);
+    }
+    ans.push_back(q.min());
+    return ans;
+}
+vector<vector<int>> minSliding_2d_Window(vector<vector<int>> v, int k)
+{
+
+    int n = v.size();
+    int m = v[0].size();
+
+    // caclulting sliding window horizontally
+    vector<vector<int>> horizontal;
+    for (int i = 0; i < v.size(); i++)
+    {
+        vector<int> part = minSliding_1d_Window(v[i], k);
+        horizontal.push_back(part);
+    }
+
+    vector<vector<int>> final(n - k + 1, vector<int>(m - k + 1, -3));
+    int c = 0;
+
+    // calculationg sliding window vertically
+    for (int j = 0; j < horizontal[0].size(); j++)
+    {
+        vector<int> v;
+        for (int i = 0; i < horizontal.size(); i++)
+        {
+            v.push_back(horizontal[i][j]);
+        }
+        vector<int> tmp = minSliding_1d_Window(v, k);
+
+        // pushing the result in our resultant matrix
+        for (int index = 0; index < n - k + 1; index++)
+        {
+            final[index][c] = tmp[index];
+        }
+        c++;
+    }
+
+    // return final matrix
+    return final;
+}

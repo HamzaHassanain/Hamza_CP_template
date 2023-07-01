@@ -1,4 +1,3 @@
-// عَافِرِ وَ بتاع //
 #include <bits/stdc++.h>
 #include <iomanip>
 #include <chrono>
@@ -93,37 +92,19 @@ void using_local()
     if (myfile)
     {
         use_debug;
-        freopen("input", "r", stdin), freopen("output", "w", stdout);
+        freopen("input.txt", "r", stdin), freopen("output.txt", "w", stdout);
     }
 }
 
-// عَافِرِ وَ بتاع //
-/*
-    4
-
-    1     2    3   4  5    6
-
-
-
-*/
-
-vec factors(ll n)
-{
-    vec res;
-    for (ll x = 1; x * x <= n; x++)
-    {
-        if (n % x == 0)
-        {
-            if (n / x != x)
-                res.push_back(n / x);
-            res.push_back(x);
-        }
-    }
-
-    return res;
-}
 void test_case(int case_num)
 {
+    /*
+        READ->
+
+        THINK->
+
+        CODE
+    */
 }
 void pre_init()
 {
@@ -145,9 +126,7 @@ int main()
         test_case(i);
     auto t2 = high_resolution_clock::now();
 
-    /* Getting number of milliseconds as a double. */
     duration<double, std::milli> ms_double = t2 - t1;
     if (global_use_clock && global_use_debug)
-        cout << endl
-             << ms_double.count() << "ms\n";
+        cout << ms_double.count() << "ms\n";
 }
