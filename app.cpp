@@ -1,11 +1,23 @@
 #include <bits/stdc++.h>
 #include <iomanip>
 #include <chrono>
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
 using namespace std;
 using std::chrono::duration;
 using std::chrono::duration_cast;
 using std::chrono::high_resolution_clock;
 using std::chrono::milliseconds;
+using namespace __gnu_pbds;
+
+template <typename K, typename V, typename Comp = std::less<K>>
+using ordered_map = tree<K, V, Comp, rb_tree_tag, tree_order_statistics_node_update>;
+template <typename K, typename Comp = std::less<K>>
+using ordered_set = ordered_map<K, null_type, Comp>;
+template <typename K, typename V, typename Comp = std::less_equal<K>>
+using ordered_multimap = tree<K, V, Comp, rb_tree_tag, tree_order_statistics_node_update>;
+template <typename K, typename Comp = std::less_equal<K>>
+using ordered_multiset = ordered_multimap<K, null_type, Comp>;
 
 bool global_use_clock = false;
 bool global_use_test_case = false;
@@ -92,7 +104,7 @@ void using_local()
     if (myfile)
     {
         use_debug;
-        freopen("input.txt", "r", stdin), freopen("output.txt", "w", stdout);
+        freopen("input.in", "r", stdin), freopen("output.out", "w", stdout);
     }
 }
 
@@ -102,9 +114,10 @@ void test_case(int case_num)
         READ->
 
         THINK->
-
+           
         CODE
     */
+     
 }
 void pre_init()
 {

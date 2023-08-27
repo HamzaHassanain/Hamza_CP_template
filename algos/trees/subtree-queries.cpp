@@ -1,13 +1,5 @@
-#include <bits/stdc++.h>
-
+#include<bits/stdc++.h>
 using namespace std;
-void FastIO()
-{
-    ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
-#ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin), freopen("output.txt", "w", stdout);
-#endif
-}
 struct segTree
 {
     int size;
@@ -60,7 +52,63 @@ struct segTree
         set(i, value, 1, 1, size);
     }
 };
+const int N = 2e5+1;
+segTree sgt;
+vector<int> adj[N];
+long long a[N];
+int timer = 0;
 
-int main()
-{
+int flat[2*N];
+int start[N];
+int leave[N];
+
+void flaten_tree(int u  =1,int p  = 0) {
+	timer++;
+	start[u] = timer;
+	flat[timer] = u;
+	
+	for(int& v : adj[u]) {
+		if(p == v) continue;
+		flaten_tree(v,u);
+	}
+	timer++;
+	leave[u] = timer;
+	flat[timer] = u;
+} 
+
+int main() {
+
+	int n,q;
+	cin >> n >> q;
+	sgt.init(2*n);
+	for(int i  =1;i<=n;i++ ) cin >> a[i];
+	for(int i  = 2;i<= n;i++) {
+		int u,v;cin >> u >> v;
+		adj[u].push_back(v);
+		adj[v].push_back(u);
+	}
+	flaten_tree();
+	for(int i  =1;i<=2*n;i++ ) sgt.set(i,a[flat[i]]);
+	
+	vector<vector<int>> qs;
+	
+	for (int i = 0;i < q;i++) {
+		int a,b;
+		cin >> a >> b;
+		if(a == 1) {
+			int c;cin >>c;
+			qs.push_back( {a,b ,c} );
+		}
+		else qs.push_back( {a,b} );
+	}
+	
+	for(auto arr : qs) {
+		int type = arr[0];
+		if(type ==2) {
+			cout << sgt.sum(start[arr[1]] ,leave[arr[1]] ) / 2 << "\n";
+		} else {
+			sgt.set(start[arr[1]] , arr[2]),sgt.set(leave[arr[1]] , arr[2]);
+		}
+	}
+	return 0;
 }
